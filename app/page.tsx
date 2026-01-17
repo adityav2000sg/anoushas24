@@ -175,9 +175,17 @@ export default function Home() {
             {currentChapter === 3 && (
               <PositivityJar key="jar" onNext={() => setCurrentChapter(4)} />
             )}
-            {currentChapter === 4 && (
-              <LetterFinale key="letter" onNext={() => setCurrentChapter(5)} />
-            )}
+           {currentChapter === 4 && (
+  <LetterFinale key="letter" onNext={() => {
+    // Stop the background music
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    setAudioPlaying(false);
+    setCurrentChapter(5);
+  }} />
+)}
             {currentChapter === 5 && (
               <GiftReveal key="gift" />
             )}

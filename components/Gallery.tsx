@@ -67,7 +67,7 @@ export default function Gallery({ onNext }: GalleryProps) {
             marginBottom: "12px",
           }}
         >
-          Through the Years 📷
+          The Highlight Reel!📷
         </motion.h2>
 
         <motion.p
