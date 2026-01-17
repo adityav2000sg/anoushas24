@@ -67,7 +67,7 @@ export default function Gallery({ onNext }: GalleryProps) {
             marginBottom: "12px",
           }}
         >
-          Our Moments 💕
+          Through the Years 📷
         </motion.h2>
 
         <motion.p
@@ -81,7 +81,7 @@ export default function Gallery({ onNext }: GalleryProps) {
             fontStyle: "italic",
           }}
         >
-          Tap a photo to see it bigger
+          24 years of amazing you ✨
         </motion.p>
       </div>
 

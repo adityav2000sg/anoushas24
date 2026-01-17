@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { jarNotes } from "@/data/content";
+import { playSound } from "@/lib/sounds";
 
 interface PositivityJarProps {
   onNext: () => void;
@@ -15,9 +16,11 @@ export default function PositivityJar({ onNext }: PositivityJarProps) {
 
   const handlePick = () => {
     setIsShaking(true);
+    playSound("shake");
     
     setTimeout(() => {
       setIsShaking(false);
+      playSound("pop");
       
       // Get available notes
       let available = jarNotes
@@ -87,7 +90,7 @@ export default function PositivityJar({ onNext }: PositivityJarProps) {
           textAlign: "center",
         }}
       >
-        The Hype Jar 🫙
+        The Positivity Jar 🫙
       </motion.h2>
 
       <motion.p

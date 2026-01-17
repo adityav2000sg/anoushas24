@@ -155,80 +155,87 @@ export const twentyFourWishes = [
  * Fun, encouraging notes for when she needs a boost
  */
 export const jarNotes = [
-  "You're literally unstoppable and everyone knows it 💪",
-  "Dubai has NO idea what's about to hit them 🌴",
-  "Remember: you're that girl and you've always been that girl ✨",
-  "Your energy is unmatched. Protect it. 🔥",
-  "Go drink some water, queen. Then keep conquering. 👑",
-  "You've survived 100% of your worst days. Legend behavior. 💫",
-  "Someone is out there telling a story where you're the main character 🌟",
-  "Your vibe attracts your tribe. And your tribe is ELITE. ⚡",
-  "Plot twist: you're about to have your best chapter yet 📖",
-  "Take the risk. Book the flight. Send the message. 🚀",
-  "You're not too much. They're just not enough. 💅",
-  "Rest if you need to, but don't you dare quit 🎯",
-  "The universe is literally conspiring in your favor rn ✨",
-  "You're the friend everyone wishes they had 💕",
-  "Your potential is scary. In the best way. 🔮",
-  "Bad days build good stories. You've got plenty of both. 📚",
-  "You make hard things look easy. That's a superpower. 🦸‍♀️",
-  "24 looks REALLY good on you 🎂",
-  "Go be the energy you want to attract ⚡",
-  "You're doing amazing sweetie. Actually though. 🥹",
+  "You make people feel welcome.",
+  "You have the kindest heart.",
+  "You’re genuinely a joy to be around.",
+  "You light up a room without trying.",
+  "You make ordinary days feel nicer.",
+  "You’re so easy to appreciate.",
+  "You’re the definition of thoughtful.",
+  "You have such a calming presence.",
+  "You always make things feel more fun.",
+  "You’re effortlessly classy.",
+  "You have amazing taste.",
+  "You’re really good at making people feel seen.",
+  "You’re one of those people who just gets it.",
+  "You’re the friend people feel lucky to have.",
+  "You make everything feel a little brighter.",
+  "You’re prettier than you think.",
+  "You’re smarter than you give yourself credit for.",
+  "You’re more capable than you realise.",
+  "You’re the kind of person people trust.",
+  "You’re so lovable — it’s not even a question.",
+  "You handle things with so much grace.",
+  "You make kindness look effortless.",
+  "You’re the best kind of energy.",
+  "You have a beautiful smile.",
+  "You have a really warm vibe.",
+  "You’re the reason people smile.",
+  "You’re doing so well — even on the quiet days.",
+  "You make people feel safe to be themselves.",
+  "You’re such a rare mix of sweet and strong.",
+  "You’re a walking good mood.",
+  "You make memories feel special.",
+  "You’re the kind of person people remember.",
+  "You have a heart that stands out.",
+  "You’re easy to celebrate.",
+  "You deserve good things, always.",
+  "You bring so much softness to the world.",
+  "You make life feel more beautiful.",
+  "You’re a genuine gem.",
+  "You always look so put-together.",
+  "You have such a lovely voice.",
+  "You’re the perfect balance of calm and fun.",
+  "You make people feel cared for.",
+  "You’re truly one of one.",
+  "You’re better than any bad day.",
+  "You make even small things feel special.",
+  "You’re the sweetest presence.",
+  "You’re so easy to love as a person.",
+  "You’re a reminder that good people exist.",
+  "You’re doing amazing — and you deserve to feel it.",
+  "Happy birthday, beautiful soul.",
 ];
 
 /**
- * GALLERY PHOTOS
+ * GALLERY PHOTOS - 24 PHOTOS, ONE FOR EACH YEAR OF HER LIFE
+ * Add your photos to /public/photos/ named year-1.jpg through year-24.jpg
  */
 export const galleryPhotos = [
-  {
-    id: 1,
-    src: "/photos/photo-1.jpg",
-    title: "Us",
-    caption: "One of my favorites",
-    date: "2024",
-    location: "",
-  },
-  {
-    id: 2,
-    src: "/photos/photo-2.jpg",
-    title: "Adventure",
-    caption: "Always exploring",
-    date: "2024",
-    location: "",
-  },
-  {
-    id: 3,
-    src: "/photos/photo-3.jpg",
-    title: "That Smile",
-    caption: "Gets me every time",
-    date: "2024",
-    location: "",
-  },
-  {
-    id: 4,
-    src: "/photos/photo-4.jpg",
-    title: "Together",
-    caption: "My favorite person",
-    date: "2024",
-    location: "",
-  },
-  {
-    id: 5,
-    src: "/photos/photo-5.jpg",
-    title: "Vibes",
-    caption: "Always good vibes",
-    date: "2024",
-    location: "",
-  },
-  {
-    id: 6,
-    src: "/photos/photo-6.jpg",
-    title: "Memories",
-    caption: "Making more of these",
-    date: "2024",
-    location: "",
-  },
+  { id: 1, src: "/photos/year-1.jpg", title: "Year 1", caption: "The beginning 👶" },
+  { id: 2, src: "/photos/year-2.jpg", title: "Year 2", caption: "Growing up" },
+  { id: 3, src: "/photos/year-3.jpg", title: "Year 3", caption: "Little explorer" },
+  { id: 4, src: "/photos/year-4.jpg", title: "Year 4", caption: "Full of wonder" },
+  { id: 5, src: "/photos/year-5.jpg", title: "Year 5", caption: "Starting school" },
+  { id: 6, src: "/photos/year-6.jpg", title: "Year 6", caption: "Making friends" },
+  { id: 7, src: "/photos/year-7.jpg", title: "Year 7", caption: "Adventures begin" },
+  { id: 8, src: "/photos/year-8.jpg", title: "Year 8", caption: "Curious mind" },
+  { id: 9, src: "/photos/year-9.jpg", title: "Year 9", caption: "Finding passions" },
+  { id: 10, src: "/photos/year-10.jpg", title: "Year 10", caption: "Double digits! 🎉" },
+  { id: 11, src: "/photos/year-11.jpg", title: "Year 11", caption: "Growing confident" },
+  { id: 12, src: "/photos/year-12.jpg", title: "Year 12", caption: "Pre-teen vibes" },
+  { id: 13, src: "/photos/year-13.jpg", title: "Year 13", caption: "Teenager! 🎒" },
+  { id: 14, src: "/photos/year-14.jpg", title: "Year 14", caption: "Finding style" },
+  { id: 15, src: "/photos/year-15.jpg", title: "Year 15", caption: "High school days" },
+  { id: 16, src: "/photos/year-16.jpg", title: "Year 16", caption: "Sweet sixteen 💕" },
+  { id: 17, src: "/photos/year-17.jpg", title: "Year 17", caption: "Almost adult" },
+  { id: 18, src: "/photos/year-18.jpg", title: "Year 18", caption: "Officially grown! 🎓" },
+  { id: 19, src: "/photos/year-19.jpg", title: "Year 19", caption: "New chapter" },
+  { id: 20, src: "/photos/year-20.jpg", title: "Year 20", caption: "Roaring twenties" },
+  { id: 21, src: "/photos/year-21.jpg", title: "Year 21", caption: "Unstoppable 🔥" },
+  { id: 22, src: "/photos/year-22.jpg", title: "Year 22", caption: "Thriving" },
+  { id: 23, src: "/photos/year-23.jpg", title: "Year 23", caption: "Last year" },
+  { id: 24, src: "/photos/year-24.jpg", title: "Year 24", caption: "This is YOUR year! 👑" },
 ];
 
 /**
@@ -236,20 +243,20 @@ export const galleryPhotos = [
  * Celebratory but sweet - "look at you taking over the world" energy
  */
 export const theLetter = {
-  greeting: "To the birthday girl,",
-  
-  body: `TWENTY-FOUR! Look at you — moving to Dubai, career absolutely thriving, living your best life. I genuinely don't know how you do it all, but I'm so here for it.
+  greeting: "Happy Birthday, Anousha,",
 
-This past year I've watched you grow into someone even more incredible than you already were (which I didn't think was possible). You tackle everything with this energy that's equal parts ambitious and effortless, and honestly it's inspiring.
+  body: `24. What a year you’re walking into.
 
-I made this little corner of the internet because you deserve more than a card. You deserve something you can come back to whenever you need a reminder of how amazing you are — and how much you're loved.
+I’ve watched you take on a lot — plans, goals, decisions, everything that comes with building a life you’re proud of — and you handle it with this mix of grace and drive that’s genuinely rare. You’re thoughtful, you work hard, and you still manage to be the kind of person people feel better around.
 
-The 24 wishes? I mean every single one. The jar notes? They're for the days when Dubai feels far from home or work gets heavy. Come back here whenever you need to.
+I made this little corner of the internet because a card never feels like enough. I wanted you to have something you can come back to whenever you feel like it — a reminder of the best parts of you, written down in one place.
 
-Here's to 24 being YOUR year. New city, new adventures, same incredible you. I can't wait to watch you absolutely crush it.`,
+The 24 wishes are all real. And the jar notes are for any day you just want a small lift — before a big moment, after a long day, or for no reason at all.
 
-  closing: "So proud of you,",
-  
+I’m excited for everything ahead of you this year — and I’m proud of you already. Always in your corner.`,
+
+  closing: "With love,",
+
   signature: "Aditya",
   
   ps: "P.S. — There might be a hidden surprise somewhere on this page. Because you love finding things 👀",
@@ -266,9 +273,9 @@ export const easterEgg = {
  * CHAPTERS
  */
 export const chapters = [
-  { id: 0, title: "The Cover", subtitle: "Start here" },
-  { id: 1, title: "The Gallery", subtitle: "Our moments" },
+  { id: 0, title: "Welcome", subtitle: "Begin here" },
+  { id: 1, title: "Through the Years", subtitle: "Highlights & memories" },
   { id: 2, title: "24 Wishes", subtitle: "One for each year" },
-  { id: 3, title: "The Jar", subtitle: "Pick me ups" },
-  { id: 4, title: "The Letter", subtitle: "Words for you" },
+  { id: 3, title: "The Little Jar", subtitle: "Small pick-me-ups" },
+  { id: 4, title: "A Letter", subtitle: "Just for you" },
 ];

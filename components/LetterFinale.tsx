@@ -4,7 +4,11 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { theLetter, easterEgg, siteConfig } from "@/data/content";
 
-export default function LetterFinale() {
+interface LetterFinaleProps {
+  onNext?: () => void;
+}
+
+export default function LetterFinale({ onNext }: LetterFinaleProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showEasterEgg, setShowEasterEgg] = useState(false);
 
@@ -44,7 +48,7 @@ export default function LetterFinale() {
               fontFamily: "var(--font-sans)",
             }}
           >
-            Chapter Four
+            The Letter
           </p>
           <span style={{ fontSize: "32px" }}>💌</span>
         </motion.div>
@@ -232,8 +236,8 @@ export default function LetterFinale() {
           {["🎉", "🎂", "🥳", "🎈", "✨"].map((emoji, i) => (
             <motion.span
               key={i}
-              animate={{ y: [0, -10, 0], rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 2, delay: i * 0.2, repeat: Infinity }}
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 2, delay: i * 0.2, repeat: Infinity, ease: "easeInOut" }}
               style={{ fontSize: "28px" }}
             >
               {emoji}
@@ -272,6 +276,33 @@ export default function LetterFinale() {
         >
           With love, {siteConfig.author} 💕
         </p>
+
+        {/* Continue to gift reveal button */}
+        {onNext && (
+          <motion.button
+            onClick={onNext}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              marginTop: "40px",
+              padding: "18px 48px",
+              fontSize: "16px",
+              fontFamily: "var(--font-sans)",
+              fontWeight: 600,
+              color: "#C44569",
+              background: "#ffffff",
+              border: "none",
+              borderRadius: "100px",
+              cursor: "pointer",
+              boxShadow: "0 8px 30px rgba(0,0,0,0.2)",
+            }}
+          >
+            But wait... there's more 👀
+          </motion.button>
+        )}
       </motion.div>
 
       {/* Easter Egg Modal */}

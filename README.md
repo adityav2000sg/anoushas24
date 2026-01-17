@@ -1,117 +1,72 @@
-# 🎂 Anousha, 24 — A Birthday Keepsake Website
+# 🎂 Anousha's 24th Birthday Website
 
-A stunning, cinematic, private birthday website experience. Built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.
-
----
-
-## ✨ Features
-
-- **Cinematic Envelope Reveal** — Opens like a real letter
-- **5 Chapter Journey** — Cover → Gallery → 24 Drawers → Positivity Jar → Letter
-- **Premium Aesthetic** — Old-money romance, editorial typography, film grain textures
-- **Mobile-First** — Flawless iPhone experience
-- **Interactive Elements** — Tap drawers, pick notes from a jar, find the easter egg
-- **Optional Audio** — Background music toggle (default off)
-- **Fully Customizable** — Single content file for all text, photos, and messages
-
----
+A special birthday website with party vibes, confetti, and lots of love!
 
 ## 🚀 Quick Start
 
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Run development server
 npm run dev
-
-# 3. Open in browser
-open http://localhost:3000
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000)
 
-## 📝 How to Customize
+## 📁 What to Customize
 
-### All content is in one file: `/data/content.ts`
+### Photos (`/public/photos/`)
+Add 24 photos, one for each year of her life:
+- `year-1.jpg` through `year-24.jpg`
+- Square or portrait photos work best
+- Tip: Ask her family for childhood photos!
 
-Open this file to edit:
+### Music (`/public/audio.mp3`)
+Add "Celebration" by Kool & The Gang or another party song.
 
-| Section | What to Edit |
-|---------|--------------|
-| `siteConfig` | Her name, age, your name, date, subtitle |
-| `galleryPhotos` | Photo paths, titles, captions, dates, locations |
-| `twentyFourThings` | The 24 things you love about her |
-| `jarNotes` | Positivity notes for the jar |
-| `theLetter` | Your personal letter (greeting, body, closing, PS) |
-| `easterEgg` | The hidden surprise message |
-| `chapters` | Chapter titles (optional) |
+### Sound Effects (`/public/sounds/`)
+Add these for extra fun (optional):
+- `confetti.mp3` - Party popper sound
+- `drawer.mp3` - Drawer sliding sound
+- `shake.mp3` - Jar shaking sound
+- `pop.mp3` - Note pop sound
 
----
+Get free sounds from [Mixkit](https://mixkit.co/free-sound-effects/)
 
-## 🖼️ Adding Your Photos
+### Content (`/data/content.ts`)
+Edit the file to customize:
+- Her name, age, your name
+- 24 birthday wishes
+- Positivity jar notes
+- The letter
+- Photo captions
+- Easter egg message
 
-1. Place photos in: `/public/photos/`
-2. Name them: `photo-1.jpg`, `photo-2.jpg`, etc.
-3. Update `content.ts` with matching paths
+## 🎉 Features
 
-**Photo tips:**
-- Use 4:5 or 3:4 aspect ratio for best results
-- JPG or PNG format
-- 6-12 photos work best visually
+1. **Party Intro** - Countdown → Confetti explosion → Big reveal
+2. **Through the Years** - 24 photos, one for each year
+3. **24 Birthday Wishes** - Pull-out drawer animation for each wish
+4. **Hype Jar** - Random positivity notes for tough days
+5. **The Letter** - Your heartfelt message + hidden easter egg
 
----
+## 🔊 Audio Controls
 
-## 🎵 Adding Background Music
+- 🔊/🔇 - Toggle background music
+- 🔔/🔕 - Toggle sound effects
 
-1. Place audio file at: `/public/audio.mp3`
-2. The audio toggle will automatically appear
-3. Default is OFF (never autoplays)
-
----
-
-## 📁 Project Structure
-
-```
-anousha-24/
-├── app/
-│   ├── globals.css      # Styles & design tokens
-│   ├── layout.tsx       # Root layout
-│   └── page.tsx         # Main page orchestrator
-├── components/
-│   ├── EnvelopeIntro.tsx    # Animated envelope reveal
-│   ├── ChapterMap.tsx       # Navigation sidebar
-│   ├── Cover.tsx            # Chapter 1: Title page
-│   ├── Gallery.tsx          # Chapter 2: Photo gallery
-│   ├── Drawers24.tsx        # Chapter 3: 24 drawers
-│   ├── PositivityJar.tsx    # Chapter 4: Note jar
-│   ├── LetterFinale.tsx     # Chapter 5: Letter & finale
-│   ├── Modal.tsx            # Reusable modal
-│   └── AudioToggle.tsx      # Music player
-├── data/
-│   └── content.ts       # ⭐ ALL CONTENT HERE
-└── public/
-    ├── photos/          # Your photos go here
-    └── audio.mp3        # Optional background music
-```
-
----
-
-## 🚢 Deployment
+## 🚢 Deploy
 
 ### Vercel (Recommended)
-
 ```bash
-npm i -g vercel
+npm install -g vercel
 vercel
 ```
 
----
+### Netlify
+```bash
+npm run build
+# Upload the `.next` folder or connect GitHub repo
+```
 
-## 🐣 Easter Egg
+## 💕 Made with Love
 
-There's a hidden surprise! Look for a tiny heart icon in the Letter chapter.
-
----
-
-Made with love. 🤍
+For Anousha's 24th birthday, from Aditya

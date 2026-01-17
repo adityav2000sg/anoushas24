@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/data/content";
+import { playSound } from "@/lib/sounds";
 
 interface EnvelopeIntroProps {
   onComplete: () => void;
@@ -110,6 +111,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
     const timer1 = setTimeout(() => {
       setPhase("surprise");
       setShowConfetti(true);
+      playSound("confetti");
       audioRef.current?.play().catch(() => {});
     }, 1500);
 

@@ -9,12 +9,15 @@ import Wishes24 from "@/components/Wishes24";
 import PositivityJar from "@/components/PositivityJar";
 import LetterFinale from "@/components/LetterFinale";
 import ChapterMap from "@/components/ChapterMap";
+import { setSoundEnabled } from "@/lib/sounds";
+import GiftReveal from "@/components/GiftReveal";
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [currentChapter, setCurrentChapter] = useState(0);
   const [chapterMapOpen, setChapterMapOpen] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
+  const [soundsEnabled, setSoundsEnabled] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -40,6 +43,12 @@ export default function Home() {
       audioRef.current.play().catch(() => {});
       setAudioPlaying(true);
     }
+  };
+
+  const toggleSounds = () => {
+    const newState = !soundsEnabled;
+    setSoundsEnabled(newState);
+    setSoundEnabled(newState);
   };
 
   const handleIntroComplete = () => {
@@ -119,6 +128,31 @@ export default function Home() {
             {audioPlaying ? "🔊" : "🔇"}
           </button>
 
+          {/* Sound effects toggle */}
+          <button
+            onClick={toggleSounds}
+            style={{
+              position: "fixed",
+              bottom: "20px",
+              left: "80px",
+              zIndex: 100,
+              width: "48px",
+              height: "48px",
+              borderRadius: "50%",
+              background: "rgba(0,0,0,0.3)",
+              backdropFilter: "blur(10px)",
+              border: "1px solid rgba(255,255,255,0.2)",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "16px",
+            }}
+            title={soundsEnabled ? "Mute sounds" : "Enable sounds"}
+          >
+            {soundsEnabled ? "🔔" : "🔕"}
+          </button>
+
           {/* Chapter Map */}
           <ChapterMap
             isOpen={chapterMapOpen}
@@ -142,7 +176,10 @@ export default function Home() {
               <PositivityJar key="jar" onNext={() => setCurrentChapter(4)} />
             )}
             {currentChapter === 4 && (
-              <LetterFinale key="letter" />
+              <LetterFinale key="letter" onNext={() => setCurrentChapter(5)} />
+            )}
+            {currentChapter === 5 && (
+              <GiftReveal key="gift" />
             )}
           </AnimatePresence>
         </>

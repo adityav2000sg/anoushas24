@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { twentyFourWishes, siteConfig } from "@/data/content";
+import { playSound } from "@/lib/sounds";
 
 interface Wishes24Props {
   onNext: () => void;
@@ -139,6 +140,7 @@ export default function Wishes24({ onNext }: Wishes24Props) {
   const [openedDrawers, setOpenedDrawers] = useState<Set<number>>(new Set());
 
   const handleToggle = (index: number) => {
+    playSound("drawer");
     if (openDrawer === index) {
       setOpenDrawer(null);
     } else {

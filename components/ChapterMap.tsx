@@ -16,7 +16,7 @@ export default function ChapterMap({ isOpen, onClose, currentChapter, onNavigate
     onClose();
   };
 
-  const chapterEmojis = ["🎉", "📸", "🎁", "✨", "💌"];
+  const chapterEmojis = ["🎉", "📸", "🎁", "✨", "💌", "💕", "🏎️"];
 
   return (
     <AnimatePresence>
