@@ -24,130 +24,34 @@ export const siteConfig = {
 
 /**
  * 24 BIRTHDAY WISHES
- * One epic wish for each year she's been alive
- * Themed around: Dubai move, career success, being 24 and thriving
+ * One wish for each year — warm, classy, and very "Anousha"
+ * Theme: new chapter ahead (Dubai soon), career momentum, soft + steady confidence
  */
 export const twentyFourWishes = [
-  {
-    number: 1,
-    wish: "May Dubai roll out the red carpet for you",
-    emoji: "🌴",
-  },
-  {
-    number: 2,
-    wish: "May your new apartment have the BEST view",
-    emoji: "🏙️",
-  },
-  {
-    number: 3,
-    wish: "May your career keep skyrocketing",
-    emoji: "🚀",
-  },
-  {
-    number: 4,
-    wish: "May you negotiate every raise like a boss",
-    emoji: "💰",
-  },
-  {
-    number: 5,
-    wish: "May your passport get even more stamps",
-    emoji: "✈️",
-  },
-  {
-    number: 6,
-    wish: "May 24 be your most iconic year yet",
-    emoji: "👑",
-  },
-  {
-    number: 7,
-    wish: "May you never lose your charger",
-    emoji: "🔋",
-  },
-  {
-    number: 8,
-    wish: "May your coffee always be perfect",
-    emoji: "☕",
-  },
-  {
-    number: 9,
-    wish: "May you make friends who match your energy",
-    emoji: "⚡",
-  },
-  {
-    number: 10,
-    wish: "May every sunset in Dubai take your breath away",
-    emoji: "🌅",
-  },
-  {
-    number: 11,
-    wish: "May you always get the window seat",
-    emoji: "🛫",
-  },
-  {
-    number: 12,
-    wish: "May your wifi never lag on important calls",
-    emoji: "📶",
-  },
-  {
-    number: 13,
-    wish: "May you find the best brunch spots",
-    emoji: "🥂",
-  },
-  {
-    number: 14,
-    wish: "May your confidence stay unshakeable",
-    emoji: "💪",
-  },
-  {
-    number: 15,
-    wish: "May you surprise yourself with what you achieve",
-    emoji: "🏆",
-  },
-  {
-    number: 16,
-    wish: "May your weekends be full of adventures",
-    emoji: "🎢",
-  },
-  {
-    number: 17,
-    wish: "May you never forget how incredible you are",
-    emoji: "✨",
-  },
-  {
-    number: 18,
-    wish: "May 24 bring you clarity and purpose",
-    emoji: "🎯",
-  },
-  {
-    number: 19,
-    wish: "May your bank account make you smile",
-    emoji: "🤑",
-  },
-  {
-    number: 20,
-    wish: "May you laugh until your stomach hurts",
-    emoji: "😂",
-  },
-  {
-    number: 21,
-    wish: "May every risk you take pay off",
-    emoji: "🎲",
-  },
-  {
-    number: 22,
-    wish: "May you find your favorite Dubai spot",
-    emoji: "📍",
-  },
-  {
-    number: 23,
-    wish: "May this year exceed your wildest dreams",
-    emoji: "💫",
-  },
-  {
-    number: 24,
-    wish: "May you always know how loved you are",
-    emoji: "💕",
-  },
+  { number: 1, wish: "May this next chapter welcome you gently and fully", emoji: "🌿" },
+  { number: 2, wish: "May Dubai feel exciting — and quickly feel familiar", emoji: "🌴" },
+  { number: 3, wish: "May you land in a home that feels calm, bright, and yours", emoji: "🏡" },
+  { number: 4, wish: "May your days be busy in the good way — with purpose", emoji: "🗓️" },
+  { number: 5, wish: "May your career keep growing in the direction you actually want", emoji: "📈" },
+  { number: 6, wish: "May your work be recognised — quietly, clearly, and consistently", emoji: "✨" },
+  { number: 7, wish: "May you always back yourself, even before anyone else does", emoji: "🕊️" },
+  { number: 8, wish: "May you meet people who feel like good news", emoji: "🤍" },
+  { number: 9, wish: "May you find a favourite coffee spot that knows your order", emoji: "☕" },
+  { number: 10, wish: "May your weekends feel slower, softer, and fuller", emoji: "🌙" },
+  { number: 11, wish: "May you keep choosing what’s right for you, not what’s loud", emoji: "🧭" },
+  { number: 12, wish: "May you always have something to look forward to", emoji: "🎟️" },
+  { number: 13, wish: "May you travel often — and always come back happier", emoji: "✈️" },
+  { number: 14, wish: "May you keep your standards high and your heart open", emoji: "🪞" },
+  { number: 15, wish: "May you feel proud of yourself more often this year", emoji: "🏆" },
+  { number: 16, wish: "May you laugh a lot — the real kind, not the polite kind", emoji: "😂" },
+  { number: 17, wish: "May you stay close to the people who feel like home", emoji: "🏠" },
+  { number: 18, wish: "May you find beauty in the small everyday moments", emoji: "🌸" },
+  { number: 19, wish: "May your health, sleep, and peace be protected", emoji: "🛌" },
+  { number: 20, wish: "May you have days where everything just flows", emoji: "🌊" },
+  { number: 21, wish: "May you take the right risks — and feel proud for trying", emoji: "🎯" },
+  { number: 22, wish: "May you become even more sure of who you are", emoji: "⭐" },
+  { number: 23, wish: "May 24 be a year you remember with a quiet smile", emoji: "📖" },
+  { number: 24, wish: "May you never doubt how loved and celebrated you are", emoji: "🎂" },
 ];
 
 /**
@@ -212,30 +116,30 @@ export const jarNotes = [
  * Add your photos to /public/photos/ named year-1.jpg through year-24.jpg
  */
 export const galleryPhotos = [
-  { id: 1, src: "/photos/year-1.jpg", title: "Year 1", caption: "The beginning 👶" },
-  { id: 2, src: "/photos/year-2.jpg", title: "Year 2", caption: "Growing up" },
-  { id: 3, src: "/photos/year-3.jpg", title: "Year 3", caption: "Little explorer" },
-  { id: 4, src: "/photos/year-4.jpg", title: "Year 4", caption: "Full of wonder" },
-  { id: 5, src: "/photos/year-5.jpg", title: "Year 5", caption: "Starting school" },
-  { id: 6, src: "/photos/year-6.jpg", title: "Year 6", caption: "Making friends" },
-  { id: 7, src: "/photos/year-7.jpg", title: "Year 7", caption: "Adventures begin" },
-  { id: 8, src: "/photos/year-8.jpg", title: "Year 8", caption: "Curious mind" },
-  { id: 9, src: "/photos/year-9.jpg", title: "Year 9", caption: "Finding passions" },
-  { id: 10, src: "/photos/year-10.jpg", title: "Year 10", caption: "Double digits! 🎉" },
-  { id: 11, src: "/photos/year-11.jpg", title: "Year 11", caption: "Growing confident" },
-  { id: 12, src: "/photos/year-12.jpg", title: "Year 12", caption: "Pre-teen vibes" },
-  { id: 13, src: "/photos/year-13.jpg", title: "Year 13", caption: "Teenager! 🎒" },
-  { id: 14, src: "/photos/year-14.jpg", title: "Year 14", caption: "Finding style" },
-  { id: 15, src: "/photos/year-15.jpg", title: "Year 15", caption: "High school days" },
-  { id: 16, src: "/photos/year-16.jpg", title: "Year 16", caption: "Sweet sixteen 💕" },
-  { id: 17, src: "/photos/year-17.jpg", title: "Year 17", caption: "Almost adult" },
-  { id: 18, src: "/photos/year-18.jpg", title: "Year 18", caption: "Officially grown! 🎓" },
-  { id: 19, src: "/photos/year-19.jpg", title: "Year 19", caption: "New chapter" },
-  { id: 20, src: "/photos/year-20.jpg", title: "Year 20", caption: "Roaring twenties" },
-  { id: 21, src: "/photos/year-21.jpg", title: "Year 21", caption: "Unstoppable 🔥" },
-  { id: 22, src: "/photos/year-22.jpg", title: "Year 22", caption: "Thriving" },
-  { id: 23, src: "/photos/year-23.jpg", title: "Year 23", caption: "Last year" },
-  { id: 24, src: "/photos/year-24.jpg", title: "Year 24", caption: "This is YOUR year! 👑" },
+  { id: 1, src: "/photos/year-1.jpg", title: "1", caption: "" },
+  { id: 2, src: "/photos/year-2.jpg", title: "2", caption: "" },
+  { id: 3, src: "/photos/year-3.jpg", title: "3", caption: "" },
+  { id: 4, src: "/photos/year-4.jpg", title: "4", caption: "" },
+  { id: 5, src: "/photos/year-5.jpg", title: "5", caption: "" },
+  { id: 6, src: "/photos/year-6.jpg", title: "6", caption: "" },
+  { id: 7, src: "/photos/year-7.jpg", title: "7", caption: "" },
+  { id: 8, src: "/photos/year-8.jpg", title: "8", caption: "" },
+  { id: 9, src: "/photos/year-9.jpg", title: "9", caption: "" },
+  { id: 10, src: "/photos/year-10.jpg", title: "10", caption: "" },
+  { id: 11, src: "/photos/year-11.jpg", title: "11", caption: "" },
+  { id: 12, src: "/photos/year-12.jpg", title: "12", caption: "" },
+  { id: 13, src: "/photos/year-13.jpg", title: "13", caption: "" },
+  { id: 14, src: "/photos/year-14.jpg", title: "14", caption: "" },
+  { id: 15, src: "/photos/year-15.jpg", title: "15", caption: "" },
+  { id: 16, src: "/photos/year-16.jpg", title: "16", caption: "" },
+  { id: 17, src: "/photos/year-17.jpg", title: "17", caption: "" },
+  { id: 18, src: "/photos/year-18.jpg", title: "18", caption: "" },
+  { id: 19, src: "/photos/year-19.jpg", title: "19", caption: "" },
+  { id: 20, src: "/photos/year-20.jpg", title: "20", caption: "" },
+  { id: 21, src: "/photos/year-21.jpg", title: "21", caption: "" },
+  { id: 22, src: "/photos/year-22.jpg", title: "22", caption: "" },
+  { id: 23, src: "/photos/year-23.jpg", title: "23", caption: "" },
+  { id: 24, src: "/photos/year-24.jpg", title: "24", caption: "✨" },
 ];
 
 /**

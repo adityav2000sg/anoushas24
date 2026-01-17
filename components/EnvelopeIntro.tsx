@@ -14,15 +14,21 @@ function ConfettiPiece({ index, centerX, centerY }: { index: number; centerX: nu
   const colors = ["#FF6B6B", "#4ECDC4", "#FFE66D", "#FF8B94", "#A8E6CF", "#DDA0DD", "#98D8C8", "#F7DC6F", "#BB8FCE", "#85C1E9"];
   const color = colors[index % colors.length];
   
-  const angle = (index / 150) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
-  const velocity = 200 + Math.random() * 500;
+  // Use index-based pseudo-random instead of Math.random()
+  const pseudoRandom = (seed: number) => {
+    const x = Math.sin(seed * 9999) * 10000;
+    return x - Math.floor(x);
+  };
+  
+  const angle = (index / 150) * Math.PI * 2 + (pseudoRandom(index) - 0.5) * 0.5;
+  const velocity = 200 + pseudoRandom(index + 1) * 500;
   const endX = Math.cos(angle) * velocity;
   const endY = Math.sin(angle) * velocity;
   
-  const size = 8 + Math.random() * 12;
-  const isRect = Math.random() > 0.5;
-  const duration = 2 + Math.random() * 1.5;
-  const delay = Math.random() * 0.3;
+  const size = 8 + pseudoRandom(index + 2) * 12;
+  const isRect = pseudoRandom(index + 3) > 0.5;
+  const duration = 2 + pseudoRandom(index + 4) * 1.5;
+  const delay = pseudoRandom(index + 5) * 0.3;
 
   return (
     <motion.div
@@ -36,7 +42,7 @@ function ConfettiPiece({ index, centerX, centerY }: { index: number; centerX: nu
         x: centerX + endX,
         y: centerY + endY + 300,
         scale: 1,
-        rotate: Math.random() * 720,
+        rotate: pseudoRandom(index + 6) * 720,
         opacity: [1, 1, 1, 0],
       }}
       transition={{ 
@@ -63,11 +69,17 @@ function ConfettiPiece({ index, centerX, centerY }: { index: number; centerX: nu
 function FallingConfetti({ index }: { index: number }) {
   const colors = ["#FF6B6B", "#4ECDC4", "#FFE66D", "#FF8B94", "#A8E6CF", "#DDA0DD"];
   const color = colors[index % colors.length];
-  const startX = Math.random() * 100;
-  const size = 5 + Math.random() * 6;
-  const duration = 5 + Math.random() * 4;
-  const delay = Math.random() * 6;
-  const swayAmount = (Math.random() - 0.5) * 80;
+  
+  const pseudoRandom = (seed: number) => {
+    const x = Math.sin(seed * 9999) * 10000;
+    return x - Math.floor(x);
+  };
+  
+  const startX = pseudoRandom(index * 100) * 100;
+  const size = 5 + pseudoRandom(index * 101) * 6;
+  const duration = 5 + pseudoRandom(index * 102) * 4;
+  const delay = pseudoRandom(index * 103) * 6;
+  const swayAmount = (pseudoRandom(index * 104) - 0.5) * 80;
 
   return (
     <motion.div
@@ -75,7 +87,7 @@ function FallingConfetti({ index }: { index: number }) {
       animate={{
         y: typeof window !== "undefined" ? window.innerHeight + 50 : 1000,
         x: swayAmount,
-        rotate: Math.random() * 360,
+        rotate: pseudoRandom(index * 105) * 360,
         opacity: [0, 0.7, 0.7, 0],
       }}
       transition={{ duration, delay, repeat: Infinity, ease: "linear" }}
@@ -94,8 +106,65 @@ function FallingConfetti({ index }: { index: number }) {
   );
 }
 
+// Floating balloon
+function Balloon({ x, delay, color }: { x: number; delay: number; color: string }) {
+  return (
+    <motion.div
+      initial={{ y: "110vh", opacity: 0 }}
+      animate={{ y: "-10vh", opacity: 1 }}
+      transition={{ duration: 10, delay, repeat: Infinity, ease: "linear" }}
+      style={{
+        position: "fixed",
+        left: `${x}%`,
+        fontSize: "clamp(36px, 7vw, 60px)",
+        zIndex: 1,
+        filter: `hue-rotate(${color})`,
+      }}
+    >
+      🎈
+    </motion.div>
+  );
+}
+
+// Fixed position sparkle (no random positions)
+function Sparkle({ index }: { index: number }) {
+  // Pre-defined positions instead of random
+  const positions = [
+    { left: 10, top: 20 }, { left: 85, top: 15 }, { left: 25, top: 70 },
+    { left: 70, top: 25 }, { left: 15, top: 50 }, { left: 90, top: 60 },
+    { left: 50, top: 10 }, { left: 30, top: 85 }, { left: 75, top: 80 },
+    { left: 5, top: 35 }, { left: 60, top: 45 }, { left: 40, top: 90 },
+  ];
+  const pos = positions[index % positions.length];
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ 
+        opacity: [0, 1, 0],
+        scale: [0, 1, 0],
+      }}
+      transition={{
+        duration: 2,
+        delay: index * 0.25,
+        repeat: Infinity,
+      }}
+      style={{
+        position: "absolute",
+        left: `${pos.left}%`,
+        top: `${pos.top}%`,
+        fontSize: "20px",
+        pointerEvents: "none",
+      }}
+    >
+      ✨
+    </motion.div>
+  );
+}
+
 export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
-  const [phase, setPhase] = useState<"dark" | "surprise" | "party">("dark");
+  const [phase, setPhase] = useState<"waiting" | "countdown" | "surprise" | "party">("waiting");
+  const [countdown, setCountdown] = useState(3);
   const [showConfetti, setShowConfetti] = useState(false);
   const [center, setCenter] = useState({ x: 0, y: 0 });
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -104,29 +173,61 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
     if (typeof window !== "undefined") {
       setCenter({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
     }
+  
+    const a = new Audio("/audio.mp3");
+    a.volume = 0.7;
+    a.preload = "metadata";
+    audioRef.current = a;
+  
+    return () => {
+      a.pause();
+      a.src = "";
+    };
+  }, []);
 
-    audioRef.current = new Audio("/audio.mp3");
-    audioRef.current.volume = 0.7;
+  const AUDIO_START_AT = 25; // seconds into the track
 
-    const timer1 = setTimeout(() => {
+const startCountdown = () => {
+  setPhase("countdown");
+
+  let count = 3;
+  setCountdown(count);
+
+  const countdownInterval = setInterval(() => {
+    count--;
+    if (count > 0) {
+      setCountdown(count);
+    } else {
+      clearInterval(countdownInterval);
       setPhase("surprise");
       setShowConfetti(true);
       playSound("confetti");
-      audioRef.current?.play().catch(() => {});
-    }, 1500);
 
-    const timer2 = setTimeout(() => setPhase("party"), 2500);
-    const timer3 = setTimeout(() => onComplete(), 5500);
+      const a = audioRef.current;
+      if (a) {
+        const playFrom = async () => {
+          // If metadata is ready, seek immediately; otherwise wait for it once.
+          if (a.readyState >= 1) {
+            a.currentTime = Math.min(AUDIO_START_AT, Math.max(0, (a.duration || AUDIO_START_AT) - 0.25));
+            await a.play().catch(() => {});
+          } else {
+            const onMeta = async () => {
+              a.currentTime = Math.min(AUDIO_START_AT, Math.max(0, (a.duration || AUDIO_START_AT) - 0.25));
+              await a.play().catch(() => {});
+              a.removeEventListener("loadedmetadata", onMeta);
+            };
+            a.addEventListener("loadedmetadata", onMeta);
+            a.load();
+          }
+        };
 
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      if (audioRef.current) {
-        audioRef.current.pause();
+        playFrom();
       }
-    };
-  }, [onComplete]);
+
+      setTimeout(() => setPhase("party"), 1000);
+    }
+  }, 800);
+};
 
   return (
     <div
@@ -140,62 +241,266 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        background: phase === "dark" 
-          ? "#0a0a0a" 
+        background: phase === "waiting" || phase === "countdown"
+          ? "linear-gradient(180deg, #FF6B9D 0%, #C44569 30%, #8B2A5B 70%, #4A1942 100%)"
           : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         overflow: "hidden",
         transition: "background 0.5s ease",
+        padding: "20px",
       }}
     >
+      {/* Floating balloons */}
+      {(phase === "waiting" || phase === "countdown") && (
+        <>
+          <Balloon x={5} delay={0} color="0deg" />
+          <Balloon x={20} delay={1.5} color="40deg" />
+          <Balloon x={80} delay={0.5} color="120deg" />
+          <Balloon x={95} delay={1} color="200deg" />
+        </>
+      )}
+
+      {/* Sparkles - fixed positions */}
+      {phase === "waiting" && (
+        <>
+          {[...Array(12)].map((_, i) => (
+            <Sparkle key={i} index={i} />
+          ))}
+        </>
+      )}
+
       {/* Confetti explosion */}
       {showConfetti && (
         <>
-          {[...Array(150)].map((_, i) => (
+          {[...Array(100)].map((_, i) => (
             <ConfettiPiece key={`explode-${i}`} index={i} centerX={center.x} centerY={center.y} />
           ))}
         </>
       )}
 
       {/* Gentle falling confetti */}
-      {phase !== "dark" && (
+      {(phase === "surprise" || phase === "party") && (
         <>
-          {[...Array(30)].map((_, i) => (
+          {[...Array(20)].map((_, i) => (
             <FallingConfetti key={`fall-${i}`} index={i} />
           ))}
         </>
       )}
 
-      {/* DARK PHASE - Countdown */}
-      <AnimatePresence>
-        {phase === "dark" && (
+      {/* WAITING PHASE */}
+      <AnimatePresence mode="wait">
+        {phase === "waiting" && (
           <motion.div
+            key="waiting"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 1.5 }}
+            transition={{ duration: 0.4 }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+              zIndex: 10,
+              width: "100%",
+              maxWidth: "500px",
+            }}
+          >
+            {/* Emoji row */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              style={{
+                display: "flex",
+                gap: "clamp(8px, 3vw, 16px)",
+                marginBottom: "20px",
+                flexWrap: "wrap",
+                justifyContent: "center",
+              }}
+            >
+              {["🎂", "🎁", "🎈", "🥳", "🎉"].map((emoji, i) => (
+                <motion.span
+                  key={i}
+                  animate={{ 
+                    y: [0, -10, 0],
+                  }}
+                  transition={{ 
+                    duration: 1.5, 
+                    delay: i * 0.15, 
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  style={{ fontSize: "clamp(28px, 7vw, 48px)" }}
+                >
+                  {emoji}
+                </motion.span>
+              ))}
+            </motion.div>
+
+            {/* It's */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              style={{
+                fontSize: "clamp(16px, 4vw, 24px)",
+                fontFamily: "var(--font-sans)",
+                color: "rgba(255,255,255,0.9)",
+                marginBottom: "4px",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+              }}
+            >
+              It's
+            </motion.p>
+
+            {/* NAME */}
+            <motion.h1
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 }}
+              style={{
+                fontSize: "clamp(40px, 12vw, 100px)",
+                fontFamily: "var(--font-serif)",
+                color: "#ffffff",
+                fontWeight: 400,
+                lineHeight: 1,
+                marginBottom: "4px",
+                textShadow: "0 4px 30px rgba(0,0,0,0.3)",
+              }}
+            >
+              {siteConfig.name}'s
+            </motion.h1>
+
+            {/* BIRTHDAY! */}
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+              style={{
+                fontSize: "clamp(28px, 9vw, 70px)",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 800,
+                color: "#FFE66D",
+                textTransform: "uppercase",
+                letterSpacing: "0.05em",
+                marginBottom: "16px",
+                textShadow: "0 4px 20px rgba(0,0,0,0.3)",
+              }}
+            >
+              Birthday!
+            </motion.h2>
+
+            {/* Age badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.9 }}
+              style={{
+                width: "clamp(60px, 15vw, 80px)",
+                height: "clamp(60px, 15vw, 80px)",
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, #FFE66D 0%, #FFA502 100%)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: "32px",
+                boxShadow: "0 8px 30px rgba(255,165,2,0.5)",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "clamp(28px, 7vw, 36px)",
+                  fontFamily: "var(--font-serif)",
+                  fontWeight: 700,
+                  color: "#4A1942",
+                }}
+              >
+                {siteConfig.age}
+              </span>
+            </motion.div>
+
+            {/* Start button */}
+            <motion.button
+              onClick={startCountdown}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                padding: "clamp(14px, 4vw, 20px) clamp(32px, 10vw, 60px)",
+                fontSize: "clamp(14px, 4vw, 18px)",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 700,
+                color: "#4A1942",
+                background: "#ffffff",
+                border: "none",
+                borderRadius: "100px",
+                cursor: "pointer",
+                boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+              }}
+            >
+              🎉 Let's Celebrate! 🎉
+            </motion.button>
+
+            {/* From line */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.3 }}
+              style={{
+                marginTop: "32px",
+                fontSize: "clamp(12px, 3vw, 14px)",
+                fontFamily: "var(--font-sans)",
+                color: "rgba(255,255,255,0.7)",
+              }}
+            >
+              Made with 💕 by {siteConfig.author}
+            </motion.p>
+          </motion.div>
+        )}
+
+        {/* COUNTDOWN PHASE */}
+        {phase === "countdown" && (
+          <motion.div
+            key="countdown"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 2 }}
             transition={{ duration: 0.3 }}
-            style={{ textAlign: "center" }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              zIndex: 10,
+            }}
           >
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 1, repeat: Infinity }}
+            <motion.span
+              key={countdown}
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 1.5, opacity: 0 }}
+              transition={{ duration: 0.4 }}
               style={{
-                fontSize: "28px",
-                color: "#ffffff",
+                fontSize: "clamp(100px, 30vw, 220px)",
                 fontFamily: "var(--font-sans)",
-                letterSpacing: "0.3em",
+                fontWeight: 900,
+                color: "#ffffff",
+                textShadow: "0 0 60px rgba(255,255,255,0.5)",
               }}
             >
-              3... 2... 1...
-            </motion.p>
+              {countdown}
+            </motion.span>
           </motion.div>
         )}
-      </AnimatePresence>
 
-      {/* SURPRISE PHASE - Clean reveal */}
-      <AnimatePresence>
+        {/* SURPRISE/PARTY PHASE */}
         {(phase === "surprise" || phase === "party") && (
           <motion.div
+            key="party"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
@@ -205,7 +510,8 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
               alignItems: "center",
               textAlign: "center",
               zIndex: 100,
-              padding: "0 24px",
+              width: "100%",
+              maxWidth: "500px",
             }}
           >
             {/* SURPRISE! */}
@@ -214,16 +520,16 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.4 }}
               style={{
-                fontSize: "clamp(20px, 4vw, 32px)",
+                fontSize: "clamp(22px, 5vw, 40px)",
                 fontFamily: "var(--font-sans)",
                 fontWeight: 700,
                 color: "#ffffff",
                 textTransform: "uppercase",
-                letterSpacing: "0.3em",
+                letterSpacing: "0.2em",
                 marginBottom: "12px",
               }}
             >
-              🎉 Surprise! 🎉
+              🎊 Surprise! 🎊
             </motion.h2>
 
             {/* Happy Birthday */}
@@ -232,30 +538,30 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.4 }}
               style={{
-                fontSize: "clamp(14px, 3vw, 20px)",
+                fontSize: "clamp(14px, 3vw, 22px)",
                 fontFamily: "var(--font-sans)",
                 fontWeight: 600,
                 color: "#FFE66D",
-                letterSpacing: "0.25em",
+                letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                marginBottom: "24px",
+                marginBottom: "20px",
               }}
             >
               Happy Birthday
             </motion.p>
 
-            {/* NAME - HUGE */}
+            {/* NAME */}
             <motion.h1
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
               style={{
-                fontSize: "clamp(56px, 18vw, 180px)",
+                fontSize: "clamp(48px, 15vw, 160px)",
                 fontFamily: "var(--font-serif)",
                 fontWeight: 400,
                 color: "#ffffff",
                 lineHeight: 0.95,
-                marginBottom: "24px",
+                marginBottom: "20px",
                 textShadow: "0 8px 40px rgba(0,0,0,0.3)",
               }}
             >
@@ -268,20 +574,20 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
               style={{
-                width: "90px",
-                height: "90px",
+                width: "clamp(70px, 18vw, 90px)",
+                height: "clamp(70px, 18vw, 90px)",
                 borderRadius: "50%",
                 background: "linear-gradient(135deg, #FFE66D 0%, #FFA502 100%)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 boxShadow: "0 8px 30px rgba(255,165,2,0.5)",
-                marginBottom: "32px",
+                marginBottom: "28px",
               }}
             >
               <span
                 style={{
-                  fontSize: "42px",
+                  fontSize: "clamp(32px, 8vw, 42px)",
                   fontFamily: "var(--font-serif)",
                   fontWeight: 700,
                   color: "#764ba2",
@@ -291,53 +597,48 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
               </span>
             </motion.div>
 
-            {/* Message - only in party phase */}
-            <AnimatePresence>
-              {phase === "party" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  style={{ textAlign: "center" }}
-                >
-                  <p
-                    style={{
-                      fontSize: "clamp(14px, 2.5vw, 18px)",
-                      fontFamily: "var(--font-sans)",
-                      color: "rgba(255,255,255,0.9)",
-                    }}
-                  >
-                    With love, {siteConfig.author} 💕
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Message */}
+            {phase === "party" && (
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                style={{
+                  fontSize: "clamp(14px, 3vw, 18px)",
+                  fontFamily: "var(--font-sans)",
+                  color: "rgba(255,255,255,0.9)",
+                }}
+              >
+                With love, {siteConfig.author} 💕
+              </motion.p>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Skip button - positioned clearly at bottom */}
-      {phase !== "dark" && (
+      {/* Continue button */}
+      {phase === "party" && (
         <motion.button
           onClick={onComplete}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.8 }}
-          transition={{ delay: 2 }}
-          whileHover={{ opacity: 1 }}
+          animate={{ opacity: 0.9 }}
+          transition={{ delay: 1.5 }}
+          whileHover={{ opacity: 1, scale: 1.02 }}
           style={{
             position: "absolute",
-            bottom: "40px",
-            fontSize: "14px",
+            bottom: "clamp(20px, 5vh, 40px)",
+            fontSize: "clamp(14px, 3.5vw, 16px)",
             color: "#ffffff",
             background: "rgba(255,255,255,0.2)",
-            border: "none",
-            padding: "12px 28px",
+            border: "2px solid rgba(255,255,255,0.4)",
+            padding: "clamp(12px, 3vw, 14px) clamp(28px, 8vw, 36px)",
             borderRadius: "100px",
             cursor: "pointer",
             fontFamily: "var(--font-sans)",
+            fontWeight: 600,
           }}
         >
-          Tap to continue →
+          Enter →
         </motion.button>
       )}
     </div>
