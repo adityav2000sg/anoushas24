@@ -54,6 +54,7 @@ export const twentyFourWishes = [
   { number: 24, wish: "May you never doubt how loved and celebrated you are", emoji: "🎂" },
 ];
 
+
 /**
  * POSITIVITY JAR NOTES
  * Fun, encouraging notes for when she needs a boost
